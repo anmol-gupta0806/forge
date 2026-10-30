@@ -2,6 +2,7 @@ import httpx
 import logging
 from typing import Dict, Any, Optional
 from app.core.config import settings
+from app.core.security import is_safe_external_url
 
 logger = logging.getLogger("sentinel.weather")
 
@@ -18,6 +19,9 @@ class WeatherService:
             f"temperature_2m,relative_humidity_2m,precipitation,rain,wind_speed_10m,wind_gusts_10m,surface_pressure&"
             f"hourly=precipitation_probability,soil_moisture_0_to_1cm&timezone=auto"
         )
+
+        if not is_safe_external_url(url):
+            raise ValueError(f"Unsafe external weather URL blocked: {url}")
         try:
             async with httpx.AsyncClient(timeout=8.0) as client:
                 res = await client.get(url)

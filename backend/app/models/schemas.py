@@ -3,9 +3,9 @@ from typing import List, Optional, Literal, Dict, Any
 from datetime import datetime
 
 class GeoPoint(BaseModel):
-    lat: float
-    lon: float
-    label: Optional[str] = None
+    lat: float = Field(..., ge=-90.0, le=90.0, description="Latitude in degrees (-90 to 90)")
+    lon: float = Field(..., ge=-180.0, le=180.0, description="Longitude in degrees (-180 to 180)")
+    label: Optional[str] = Field(None, max_length=150, description="Descriptive location name")
 
 class ThreatReport(BaseModel):
     id: str

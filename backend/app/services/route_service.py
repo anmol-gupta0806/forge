@@ -2,6 +2,7 @@ import httpx
 import logging
 from typing import Dict, Any, List
 from app.core.config import settings
+from app.core.security import is_safe_external_url
 from app.models.schemas import RouteWaypoint, VehicleRoute
 
 logger = logging.getLogger("sentinel.routing")
@@ -45,28 +46,31 @@ class RouteService:
         distance_km = 0.0
         duration_minutes = 0.0
 
-        try:
-            async with httpx.AsyncClient(timeout=6.0) as client:
-                res = await client.get(osrm_url)
-                if res.status_code == 200:
-                    data = res.json()
-                    routes = data.get("routes", [])
-                    if routes:
-                        primary = routes[0]
-                        distance_km = round(primary.get("distance", 0.0) / 1000.0, 1)
-                        duration_minutes = round(primary.get("duration", 0.0) / 60.0, 1)
-                        geometry = primary.get("geometry", {}).get("coordinates", [])
-                        
-                        # Downsample geometry for lightweight frontend animation
-                        step = max(1, len(geometry) // 35)
-                        for pt in geometry[::step]:
-                            waypoints.append(RouteWaypoint(lat=pt[1], lon=pt[0]))
-                        
-                        # Ensure last point matches destination
-                        if waypoints and (waypoints[-1].lat != dest_lat or waypoints[-1].lon != dest_lon):
-                            waypoints.append(RouteWaypoint(lat=dest_lat, lon=dest_lon))
-        except Exception as e:
-            logger.warning(f"OSRM online query note: {e}. Generating geodetic corridor.")
+        if not is_safe_external_url(osrm_url):
+            logger.warning(f"Unsafe OSRM URL rejected: {osrm_url}")
+        else:
+            try:
+                async with httpx.AsyncClient(timeout=6.0) as client:
+                    res = await client.get(osrm_url)
+                    if res.status_code == 200:
+                        data = res.json()
+                        routes = data.get("routes", [])
+                        if routes:
+                            primary = routes[0]
+                            distance_km = round(primary.get("distance", 0.0) / 1000.0, 1)
+                            duration_minutes = round(primary.get("duration", 0.0) / 60.0, 1)
+                            geometry = primary.get("geometry", {}).get("coordinates", [])
+                            
+                            # Downsample geometry for lightweight frontend animation
+                            step = max(1, len(geometry) // 35)
+                            for pt in geometry[::step]:
+                                waypoints.append(RouteWaypoint(lat=pt[1], lon=pt[0]))
+                            
+                            # Ensure last point matches destination
+                            if waypoints and (waypoints[-1].lat != dest_lat or waypoints[-1].lon != dest_lon):
+                                waypoints.append(RouteWaypoint(lat=dest_lat, lon=dest_lon))
+            except Exception as e:
+                logger.warning(f"OSRM online query note: {e}. Generating geodetic corridor.")
 
         # Robust fallback if OSRM rate limited or slow: generate geodetic highway corridor
         if not waypoints:

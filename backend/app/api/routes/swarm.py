@@ -1,5 +1,5 @@
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException, Query, status
+from pydantic import BaseModel, Field
 from typing import Optional
 from app.models.schemas import SwarmExecutionResponse, ThreatReport, GeoPoint
 from app.agents.orchestrator import SwarmOrchestrator
@@ -8,10 +8,29 @@ from app.services.alert_service import AlertService
 router = APIRouter(prefix="/swarm", tags=["Swarm Execution"])
 
 class SwarmTriggerRequest(BaseModel):
-    threat_id: Optional[str] = None
-    lat: Optional[float] = 20.2961
-    lon: Optional[float] = 85.8245
-    label: Optional[str] = "Puri Coastal Zone, Odisha"
+    threat_id: Optional[str] = Field(
+        None,
+        max_length=64,
+        pattern=r"^[A-Za-z0-9_\-]+$",
+        description="Optional ID of a calibrated or GDACS threat"
+    )
+    lat: Optional[float] = Field(
+        20.2961,
+        ge=-90.0,
+        le=90.0,
+        description="Latitude (-90 to +90)"
+    )
+    lon: Optional[float] = Field(
+        85.8245,
+        ge=-180.0,
+        le=180.0,
+        description="Longitude (-180 to +180)"
+    )
+    label: Optional[str] = Field(
+        "Puri Coastal Zone, Odisha",
+        max_length=150,
+        description="Sanitized geographic label"
+    )
 
 @router.post("/execute", response_model=SwarmExecutionResponse)
 async def execute_swarm(req: SwarmTriggerRequest):

@@ -1,6 +1,6 @@
 import json
 import os
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from typing import List, Dict, Any
 from app.services.weather_service import WeatherService
 
@@ -25,7 +25,10 @@ def get_districts() -> List[Dict[str, Any]]:
     return _load_json("districts.json")
 
 @router.get("/weather")
-async def get_weather(lat: float = 20.2961, lon: float = 85.8245) -> Dict[str, Any]:
+async def get_weather(
+    lat: float = Query(20.2961, ge=-90.0, le=90.0, description="Latitude between -90 and 90"),
+    lon: float = Query(85.8245, ge=-180.0, le=180.0, description="Longitude between -180 and 180")
+) -> Dict[str, Any]:
     """Fetches real-time weather from Open-Meteo live API."""
     return await WeatherService.get_live_weather(lat, lon)
 

@@ -176,9 +176,9 @@ export function App() {
       <StatsBar data={swarmData} isExecuting={isExecuting} />
 
       {/* 3. Main Stage: Two-Column Focused Editorial Layout */}
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+      <div className="flex-1 min-h-0 flex flex-col md:flex-row overflow-hidden">
         {/* Left Stage: Full Spacious Map (62% width) */}
-        <div className="flex-1 md:w-[62%] h-[50vh] md:h-auto relative overflow-hidden">
+        <div className="flex-1 md:w-[62%] h-full min-h-[420px] relative overflow-hidden flex flex-col">
           {isExecuting && (
             <div className="absolute top-4 right-4 z-20 bg-stone-900 text-white text-xs px-3.5 py-2 font-mono flex items-center gap-2 shadow-lg border border-stone-800">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -189,7 +189,7 @@ export function App() {
         </div>
 
         {/* Right Stage: Inspector Panel with Clean Tabs (38% width) */}
-        <div className="w-full md:w-[38%] h-[50vh] md:h-auto flex flex-col overflow-hidden">
+        <div className="w-full md:w-[38%] h-full min-h-[420px] flex flex-col overflow-hidden border-t md:border-t-0 md:border-l border-stone-200">
           <InspectorPanel
             data={swarmData}
             liveSteps={liveSteps}

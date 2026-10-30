@@ -36,6 +36,9 @@ body {
 
 /* Leaflet map custom styling for clean editorial cartography */
 .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
   background-color: #e5e3df !important;
   font-family: var(--font-sans);
 }

@@ -21,3 +21,4 @@ def get_calibrated_scenarios() -> List[Dict[str, Any]]:
     Returns verified Indian regional disaster corridors with real coordinates.
     """
     return AlertService.get_calibrated_disaster_scenarios()
+

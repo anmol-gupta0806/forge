@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Navbar } from './components/Navbar';
 import { StatsBar } from './components/StatsBar';
 import { MapView } from './components/MapView';
-import { ThreatPanel } from './components/ThreatPanel';
-import { AgentReasoningPanel } from './components/AgentReasoningPanel';
-import { ReliefDrawer } from './components/ReliefDrawer';
+import { InspectorPanel } from './components/InspectorPanel';
 import type { SwarmExecutionResponse, AgentReasoningStep } from './types';
 
 export function App() {
@@ -37,7 +35,6 @@ export function App() {
           const payload = JSON.parse(event.data);
           if (payload.type === 'AGENT_STEP' && payload.step) {
             setLiveSteps((prev) => {
-              // Avoid duplicates
               if (prev.some((s) => s.step_number === payload.step.step_number)) {
                 return prev;
               }
@@ -87,9 +84,9 @@ export function App() {
         setLiveSteps(data.reasoning_chain);
       } else {
         const errText = await res.text();
-        setErrorMessage(`Swarm execution warning: ${errText.slice(0, 100)}`);
+        setErrorMessage(`Swarm execution notice: ${errText.slice(0, 100)}`);
       }
-    } catch (err: any) {
+    } catch {
       setErrorMessage('Upstream API timeout: Resilient mode activated using cached meteorological baseline.');
     } finally {
       setIsExecuting(false);
@@ -128,7 +125,7 @@ export function App() {
     await executeSwarm(scenarioId, lat, lon, label);
   };
 
-  // Handle Threat Selection from Left Panel
+  // Handle Threat Selection from Inspector
   const handleSelectThreat = async (threat: any) => {
     setSelectedThreat(threat);
     setActiveScenarioId(threat.id);
@@ -145,7 +142,6 @@ export function App() {
           await executeSwarm(undefined, latitude, longitude, 'Live Geolocation Field Station');
         },
         async () => {
-          // If permission denied or unavailable, use coastal Visakhapatnam coordinates
           setActiveScenarioId('LIVE-GPS');
           await executeSwarm(undefined, 17.6868, 83.2185, 'Visakhapatnam Bay Sector');
         }
@@ -156,8 +152,8 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f6f2] text-[#1a1917]">
-      {/* 1. Editorial Header */}
+    <div className="h-screen flex flex-col bg-[#fbfbfa] text-stone-900 overflow-hidden font-sans">
+      {/* 1. Clean Editorial Header */}
       <Navbar
         onSelectScenario={handleSelectScenario}
         activeScenarioId={activeScenarioId}
@@ -166,11 +162,11 @@ export function App() {
         wsConnected={wsConnected}
       />
 
-      {/* Resilience / Error Toast */}
+      {/* Resilience Warning Banner */}
       {errorMessage && (
-        <div className="bg-amber-50 border-b border-amber-300 text-amber-900 px-6 py-2 text-xs font-mono flex items-center justify-between">
+        <div className="bg-amber-50 border-b border-amber-300 text-amber-900 px-6 py-1.5 text-xs font-mono flex items-center justify-between">
           <span>⚠️ {errorMessage}</span>
-          <button onClick={() => setErrorMessage(null)} className="text-amber-700 underline text-[11px]">
+          <button onClick={() => setErrorMessage(null)} className="text-amber-800 underline text-[11px]">
             Dismiss
           </button>
         </div>
@@ -179,41 +175,31 @@ export function App() {
       {/* 2. Key Metrics Stats Bar */}
       <StatsBar data={swarmData} isExecuting={isExecuting} />
 
-      {/* 3. Main Dashboard Workspace (Three Column Layout) */}
-      <div className="flex-1 flex flex-col lg:flex-row min-h-[520px] overflow-hidden">
-        {/* Left Column: Active Threats (22% width) */}
-        <div className="w-full lg:w-72 xl:w-80 shrink-0 h-80 lg:h-auto overflow-hidden">
-          <ThreatPanel
-            threats={threats}
-            activeThreat={selectedThreat}
-            onSelectThreat={handleSelectThreat}
-            isExecuting={isExecuting}
-          />
-        </div>
-
-        {/* Center Column: Interactive Cartographic Map (Flex-1) */}
-        <div className="flex-1 h-96 lg:h-auto relative border-y lg:border-y-0 border-[#e6e4dc]">
+      {/* 3. Main Stage: Two-Column Focused Editorial Layout */}
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        {/* Left Stage: Full Spacious Map (62% width) */}
+        <div className="flex-1 md:w-[62%] h-[50vh] md:h-auto relative overflow-hidden">
           {isExecuting && (
-            <div className="absolute top-4 right-4 z-20 bg-[#1a1917] text-white text-xs px-3 py-1.5 font-mono flex items-center gap-2 shadow-md">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-              ORCHESTRATING MULTI-AGENT SWARM (STEP {liveSteps.length}/5)...
+            <div className="absolute top-4 right-4 z-20 bg-stone-900 text-white text-xs px-3.5 py-2 font-mono flex items-center gap-2 shadow-lg border border-stone-800">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>ORCHESTRATING MULTI-AGENT SWARM (STEP {liveSteps.length}/5)...</span>
             </div>
           )}
           <MapView data={swarmData} />
         </div>
 
-        {/* Right Column: Agent Reasoning Stream (28% width) */}
-        <div className="w-full lg:w-84 xl:w-96 shrink-0 h-96 lg:h-auto overflow-hidden">
-          <AgentReasoningPanel
-            steps={liveSteps.length > 0 ? liveSteps : (swarmData?.reasoning_chain || [])}
+        {/* Right Stage: Inspector Panel with Clean Tabs (38% width) */}
+        <div className="w-full md:w-[38%] h-[50vh] md:h-auto flex flex-col overflow-hidden">
+          <InspectorPanel
+            data={swarmData}
+            liveSteps={liveSteps}
+            threats={threats}
+            activeThreatId={selectedThreat?.id || activeScenarioId}
+            onSelectThreat={handleSelectThreat}
             isExecuting={isExecuting}
-            totalLatencyMs={swarmData?.total_latency_ms}
           />
         </div>
       </div>
-
-      {/* 4. Bottom Drawer: Relief Quotas, Transit Corridors & Staged Depots */}
-      <ReliefDrawer data={swarmData} />
     </div>
   );
 }

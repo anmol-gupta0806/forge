@@ -11,3 +11,4 @@ echo.
 echo Application initiated. Access SENTINEL at: http://localhost:5173
 echo API Documentation available at: http://localhost:8000/docs
 echo ===================================================================
+

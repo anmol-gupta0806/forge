@@ -86,3 +86,4 @@ class RagService:
             if proto["hazard"] == threat_type:
                 return proto
         return cls.NDMA_PROTOCOLS[0]
+

@@ -30,3 +30,4 @@ class WebSocketManager:
             self.disconnect(dead)
 
 ws_manager = WebSocketManager()
+

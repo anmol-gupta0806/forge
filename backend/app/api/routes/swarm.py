@@ -26,24 +26,27 @@ async def execute_swarm(req: SwarmTriggerRequest):
     custom_threat = None
     
     if req.threat_id:
-        # Match with known calibrated scenario if requested
+        # Match with known calibrated scenario or GDACS alert if requested
         scenarios = AlertService.get_calibrated_disaster_scenarios()
-        for s in scenarios:
-            if s["id"] == req.threat_id:
-                custom_threat = ThreatReport(
-                    id=s["id"],
-                    type=s["type"],
-                    title=s["title"],
-                    severity=s["severity"],
-                    location=GeoPoint(**s["location"]),
-                    radius_km=s["radius_km"],
-                    wind_speed_kmh=s.get("wind_speed_kmh"),
-                    rainfall_mm_24h=s.get("rainfall_mm_24h"),
-                    temperature_c=s.get("temperature_c"),
-                    source=s["source"],
-                    source_url=s["source_url"]
-                )
-                break
+        matched = next((s for s in scenarios if s["id"] == req.threat_id), None)
+        if not matched and req.threat_id.startswith("GDACS-"):
+            gdacs_alerts = await AlertService.fetch_gdacs_live_alerts()
+            matched = next((g for g in gdacs_alerts if g["id"] == req.threat_id), None)
+
+        if matched:
+            custom_threat = ThreatReport(
+                id=matched["id"],
+                type=matched["type"],
+                title=matched["title"],
+                severity=matched["severity"],
+                location=GeoPoint(**matched["location"]),
+                radius_km=matched["radius_km"],
+                wind_speed_kmh=matched.get("wind_speed_kmh"),
+                rainfall_mm_24h=matched.get("rainfall_mm_24h"),
+                temperature_c=matched.get("temperature_c"),
+                source=matched["source"],
+                source_url=matched["source_url"]
+            )
     
     res = await SwarmOrchestrator.execute_swarm_mission(
         lat=req.lat or 20.2961,
@@ -52,3 +55,4 @@ async def execute_swarm(req: SwarmTriggerRequest):
         custom_threat=custom_threat
     )
     return res
+

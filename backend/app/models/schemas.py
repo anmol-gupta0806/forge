@@ -125,3 +125,4 @@ class MonitoringStatus(BaseModel):
     threats_detected_count: int
     active_regions: List[str]
     upstream_health: Dict[str, str]
+

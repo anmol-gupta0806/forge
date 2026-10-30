@@ -36,3 +36,4 @@ class GeoService:
         except Exception as e:
             logger.debug(f"Reverse geocode lookup note: {e}")
         return f"Coordinates {lat:.4f}°N, {lon:.4f}°E"
+

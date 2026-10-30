@@ -34,17 +34,43 @@ class AlertService:
                             if point:
                                 parts = point.strip().split()
                                 if len(parts) >= 2:
-                                    lat, lon = float(parts[0]), float(parts[1])
+                                    try:
+                                        lat, lon = float(parts[0]), float(parts[1])
+                                    except ValueError:
+                                        pass
                             
+                            # Infer disaster type from title
+                            t_lower = title.lower()
+                            inferred_type = "storm_surge"
+                            severity = "moderate"
+                            if "cyclone" in t_lower or "typhoon" in t_lower or "hurricane" in t_lower:
+                                inferred_type = "cyclone"
+                                severity = "critical"
+                            elif "flood" in t_lower:
+                                inferred_type = "flood"
+                                severity = "high"
+                            elif "earthquake" in t_lower or "quake" in t_lower:
+                                inferred_type = "earthquake"
+                                severity = "critical"
+                            elif "drought" in t_lower or "heat" in t_lower:
+                                inferred_type = "heatwave"
+                                severity = "high"
+
                             alerts.append({
                                 "id": f"GDACS-{len(alerts)+1:03d}",
+                                "type": inferred_type,
                                 "title": title,
+                                "severity": severity,
                                 "description": desc[:200],
-                                "link": link,
-                                "pub_date": pubDate,
-                                "lat": lat,
-                                "lon": lon,
-                                "source": "GDACS Live GeoRSS"
+                                "location": {
+                                    "lat": lat,
+                                    "lon": lon,
+                                    "label": title[:40]
+                                },
+                                "radius_km": 70.0,
+                                "source": "GDACS Live GeoRSS",
+                                "source_url": link,
+                                "pub_date": pubDate
                             })
         except Exception as e:
             logger.warning(f"GDACS live feed fetch issue: {e}")
@@ -95,3 +121,4 @@ class AlertService:
                 "source_url": "https://mausam.imd.gov.in"
             }
         ]
+

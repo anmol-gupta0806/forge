@@ -28,3 +28,4 @@ def get_districts() -> List[Dict[str, Any]]:
 async def get_weather(lat: float = 20.2961, lon: float = 85.8245) -> Dict[str, Any]:
     """Fetches real-time weather from Open-Meteo live API."""
     return await WeatherService.get_live_weather(lat, lon)
+

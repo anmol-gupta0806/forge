@@ -101,3 +101,4 @@ class RouteService:
             hazard_detour_applied=detour_applied,
             summary_instructions=summary
         )
+

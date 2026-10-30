@@ -38,3 +38,4 @@ Autonomous end-to-end execution: detecting emerging climate threats, evaluating 
 - Target Hackathon: Gen AI Hackathon · 100-Point Scoring Rubric
 - Target Score: 92+/100 across Technical Depth (20), Agentic Execution (25), Problem/USP (25), Live Demo (30)
 - Technical Stack: Python 3.13, FastAPI, httpx, React 19, Vite, Leaflet, Tailwind CSS v4, Lucide React
+

@@ -57,3 +57,4 @@ class WeatherService:
                 "is_live": False,
                 "error_note": str(e)
             }
+

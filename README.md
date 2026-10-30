@@ -116,3 +116,4 @@ Interactive Console will be live at: [http://localhost:5173](http://localhost:51
    - Click **"Live Met Scan"**: Uses the browser's live coordinates to query Open-Meteo in real time.
 3. **Inspect the Reasoning Stream** (Right Panel): Review the 5 reasoning steps showing exact tools invoked, sub-second latency, and verified API sources.
 4. **Expand the Manifest Drawer** (Bottom): Inspect itemized SPHERE water/food quotas and vehicle routes.
+

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap');
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f7f6f2;
+  color: #1a1917;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar for editorial elegance */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d1c8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a499;
+}
+
+/* Leaflet map custom styling for clean editorial cartography */
+.leaflet-container {
+  background-color: #e5e3df !important;
+  font-family: var(--font-sans);
+}
+
+.editorial-title {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+.mono-telemetry {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+}

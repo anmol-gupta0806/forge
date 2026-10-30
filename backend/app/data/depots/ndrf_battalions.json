@@ -1,0 +1,134 @@
+[
+  {
+    "id": "NDRF-01",
+    "name": "1st Bn NDRF Guwahati",
+    "state": "Assam",
+    "lat": 26.1445,
+    "lon": 91.7362,
+    "strength": 1149,
+    "specialties": ["Flood Rescue", "Landslide Extraction", "Collapsed Structure"],
+    "readiness": "ALERT",
+    "fleet": {"heavy_trucks": 14, "inflatable_boats": 36, "amphibious_apc": 4}
+  },
+  {
+    "id": "NDRF-02",
+    "name": "2nd Bn NDRF Nadia (Haringhata)",
+    "state": "West Bengal",
+    "lat": 22.9568,
+    "lon": 88.5442,
+    "strength": 1149,
+    "specialties": ["Cyclone Response", "Flood Rescue", "CBRN Defense"],
+    "readiness": "ALERT",
+    "fleet": {"heavy_trucks": 16, "inflatable_boats": 42, "amphibious_apc": 6}
+  },
+  {
+    "id": "NDRF-03",
+    "name": "3rd Bn NDRF Mundali (Cuttack)",
+    "state": "Odisha",
+    "lat": 20.4625,
+    "lon": 85.8830,
+    "strength": 1149,
+    "specialties": ["Super Cyclone Relief", "Coastal Surges", "Deep Water Diving"],
+    "readiness": "DEPLOYED_ACTIVE",
+    "fleet": {"heavy_trucks": 20, "inflatable_boats": 50, "amphibious_apc": 8}
+  },
+  {
+    "id": "NDRF-04",
+    "name": "4th Bn NDRF Arakkonam",
+    "state": "Tamil Nadu",
+    "lat": 13.0786,
+    "lon": 79.6685,
+    "strength": 1149,
+    "specialties": ["Cyclone Emergency", "Urban Flooding", "Tsunami Relief"],
+    "readiness": "STANDBY",
+    "fleet": {"heavy_trucks": 18, "inflatable_boats": 40, "amphibious_apc": 5}
+  },
+  {
+    "id": "NDRF-05",
+    "name": "5th Bn NDRF Pune",
+    "state": "Maharashtra",
+    "lat": 18.5204,
+    "lon": 73.8567,
+    "strength": 1149,
+    "specialties": ["Urban Search & Rescue", "Earthquake Extraction", "Industrial Chemical Hazmat"],
+    "readiness": "STANDBY",
+    "fleet": {"heavy_trucks": 15, "inflatable_boats": 28, "amphibious_apc": 4}
+  },
+  {
+    "id": "NDRF-06",
+    "name": "6th Bn NDRF Vadodara",
+    "state": "Gujarat",
+    "lat": 22.3072,
+    "lon": 73.1812,
+    "strength": 1149,
+    "specialties": ["Cyclone Response", "Chemical Hazard", "Coastal Flood"],
+    "readiness": "STANDBY",
+    "fleet": {"heavy_trucks": 15, "inflatable_boats": 32, "amphibious_apc": 4}
+  },
+  {
+    "id": "NDRF-07",
+    "name": "7th Bn NDRF Bhatinda",
+    "state": "Punjab",
+    "lat": 30.2110,
+    "lon": 74.9455,
+    "strength": 1149,
+    "specialties": ["Riverine Floods", "Border Disaster Ops", "Extreme Weather Cold/Heat"],
+    "readiness": "STANDBY",
+    "fleet": {"heavy_trucks": 12, "inflatable_boats": 25, "amphibious_apc": 3}
+  },
+  {
+    "id": "NDRF-08",
+    "name": "8th Bn NDRF Ghaziabad",
+    "state": "Uttar Pradesh",
+    "lat": 28.6692,
+    "lon": 77.4538,
+    "strength": 1149,
+    "specialties": ["Rapid Air Mobility", "National Capital Response", "CBRN Emergency"],
+    "readiness": "ALERT",
+    "fleet": {"heavy_trucks": 22, "inflatable_boats": 35, "amphibious_apc": 6}
+  },
+  {
+    "id": "NDRF-09",
+    "name": "9th Bn NDRF Bihta (Patna)",
+    "state": "Bihar",
+    "lat": 25.5683,
+    "lon": 84.8711,
+    "strength": 1149,
+    "specialties": ["Monsoon Kosi Flood Relief", "River Evacuation", "Medical Camp Setup"],
+    "readiness": "DEPLOYED_ACTIVE",
+    "fleet": {"heavy_trucks": 18, "inflatable_boats": 48, "amphibious_apc": 6}
+  },
+  {
+    "id": "NDRF-10",
+    "name": "10th Bn NDRF Guntur",
+    "state": "Andhra Pradesh",
+    "lat": 16.3067,
+    "lon": 80.4365,
+    "strength": 1149,
+    "specialties": ["Bay of Bengal Cyclones", "Krishna Basin Floods", "Diving Operations"],
+    "readiness": "ALERT",
+    "fleet": {"heavy_trucks": 16, "inflatable_boats": 38, "amphibious_apc": 5}
+  },
+  {
+    "id": "NDRF-11",
+    "name": "11th Bn NDRF Varanasi",
+    "state": "Uttar Pradesh",
+    "lat": 25.3176,
+    "lon": 82.9739,
+    "strength": 1149,
+    "specialties": ["Ganga Basin Inundation", "Mass Crowd Evacuation", "Structural Collapse"],
+    "readiness": "STANDBY",
+    "fleet": {"heavy_trucks": 14, "inflatable_boats": 30, "amphibious_apc": 4}
+  },
+  {
+    "id": "NDRF-12",
+    "name": "12th Bn NDRF Itanagar (Doimukh)",
+    "state": "Arunachal Pradesh",
+    "lat": 27.1432,
+    "lon": 93.7508,
+    "strength": 1149,
+    "specialties": ["Himalayan Mountain Rescue", "Flash Floods", "Landslide Clearance"],
+    "readiness": "STANDBY",
+    "fleet": {"heavy_trucks": 10, "inflatable_boats": 20, "amphibious_apc": 3}
+  }
+]

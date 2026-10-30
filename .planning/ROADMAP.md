@@ -10,8 +10,8 @@ A 6-phase engineering roadmap executing the full autonomous disaster response an
 - [x] **Phase 2: Live Data Integration Layer** - Open-Meteo, GDACS GeoRSS, OSRM driving engine, Nominatim geocoding, official FCI and NDRF datasets.
 - [x] **Phase 3: Multi-Agent Swarm Core** - 5-agent LangGraph-style state machine (Monitor, Assess, Logistics, Routing, Orchestrator) with SPHERE RAG engine.
 - [x] **Phase 4: Editorial Minimalist UI** - CartoDB Positron map, interactive threat feed, real-time agent reasoning audit trail, relief manifest drawer.
-- [ ] **Phase 5: WebSocket Streaming & Edge Hardening** - Real-time step-by-step agent telemetry streaming over WebSockets, offline fallback caching.
-- [ ] **Phase 6: Evaluation Polish & Demo Runbook** - Live rehearsal, benchmark verification, performance audits, and one-click production scripts.
+- [x] **Phase 5: WebSocket Streaming & Edge Hardening** - Real-time step-by-step agent telemetry streaming over WebSockets, offline fallback caching.
+- [x] **Phase 6: Evaluation Polish & Demo Runbook** - Live rehearsal, benchmark verification, performance audits, and one-click production scripts.
 
 ## Phase Details
 

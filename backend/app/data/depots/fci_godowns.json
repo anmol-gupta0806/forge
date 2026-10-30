@@ -1,0 +1,79 @@
+[
+  {
+    "id": "FCI-OD-01",
+    "name": "FCI Central Depot Bhubaneswar",
+    "state": "Odisha",
+    "lat": 20.2961,
+    "lon": 85.8245,
+    "grain_capacity_mt": 65000,
+    "current_stock_mt": 52400,
+    "items": ["Rice Grade-A", "Wheat", "Fortified Rice Kernels", "Emergency High-Calorie Biscuits"],
+    "truck_bays": 12
+  },
+  {
+    "id": "FCI-OD-02",
+    "name": "FCI Divisional Godown Cuttack",
+    "state": "Odisha",
+    "lat": 20.4625,
+    "lon": 85.8830,
+    "grain_capacity_mt": 42000,
+    "current_stock_mt": 36100,
+    "items": ["Rice Grade-A", "Wheat", "Baby Nutrition Mix"],
+    "truck_bays": 8
+  },
+  {
+    "id": "FCI-WB-01",
+    "name": "FCI Regional Depot Kolkata (Taratala)",
+    "state": "West Bengal",
+    "lat": 22.5020,
+    "lon": 88.3075,
+    "grain_capacity_mt": 120000,
+    "current_stock_mt": 98500,
+    "items": ["Rice Grade-A", "Wheat Grain", "Sugar", "Pulses / Lentils"],
+    "truck_bays": 24
+  },
+  {
+    "id": "FCI-BR-01",
+    "name": "FCI Central Godown Digha (Patna)",
+    "state": "Bihar",
+    "lat": 25.6412,
+    "lon": 85.1014,
+    "grain_capacity_mt": 85000,
+    "current_stock_mt": 71200,
+    "items": ["Wheat Grain", "Rice Grade-A", "Compressed Rations"],
+    "truck_bays": 16
+  },
+  {
+    "id": "FCI-AP-01",
+    "name": "FCI Coastal Hub Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "lat": 17.6868,
+    "lon": 83.2185,
+    "grain_capacity_mt": 90000,
+    "current_stock_mt": 79000,
+    "items": ["Rice Parboiled", "Wheat", "Edible Oil Reserves", "Water Purification Tablets"],
+    "truck_bays": 18
+  },
+  {
+    "id": "FCI-AS-01",
+    "name": "FCI North-East Hub Amingaon (Guwahati)",
+    "state": "Assam",
+    "lat": 26.1859,
+    "lon": 91.6812,
+    "grain_capacity_mt": 55000,
+    "current_stock_mt": 44300,
+    "items": ["Rice Grade-A", "Pulses", "Ready-to-Eat Emergency Food"],
+    "truck_bays": 14
+  },
+  {
+    "id": "FCI-RJ-01",
+    "name": "FCI Depot Jaipur",
+    "state": "Rajasthan",
+    "lat": 26.9124,
+    "lon": 75.7873,
+    "grain_capacity_mt": 80000,
+    "current_stock_mt": 67000,
+    "items": ["Wheat Standard", "Millet", "Water Packets (Heatwave relief)"],
+    "truck_bays": 15
+  }
+]
